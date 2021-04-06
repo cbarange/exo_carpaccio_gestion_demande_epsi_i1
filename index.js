@@ -21,7 +21,13 @@ async function main(){
       do{
         price = await question(`Saisir le prix de l'article ${articles.length+1}: `)
       }while(isNaN(price))
-      articles.push({article:article,price:price})
+      
+      let quantity
+      do{
+        quantity = await question(`Saisir la quantité de l'article ${articles.length+1}: `)
+      }while(isNaN(quantity))
+
+      articles.push({article:article,price:price, quantity:quantity})
     }
   }while(article!=='fin')
 
