@@ -3,9 +3,11 @@
 const main = require('./index')
 
 
-it('console.log the text "hello"', () => {
+it('Ask state code', () => {
   console.log = jest.fn()
   main()
-  // The first argument of the first call to the function was 'hello'
-  expect(console.log.mock.calls[0][0]).toBe('Hello World!')
+  process.stdin.send('FR')
+  process.stdin.end()
+
+  expect(console.log.mock.calls[0].value).toContain("Veuillez saisir le code d'état ?")
 })
