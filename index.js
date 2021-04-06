@@ -37,9 +37,12 @@ async function main(){
   let price_ht = articles.reduce((r,e)=>r+=e.price*e.quantity,0)
   console.log(`La somme total H.T avant reduction: ${price_ht}`)
 
-  console.log(`--- Tableu Reduction ---\n${reduction_by_price.map(e=>` >${e.price}=${e.value}`).join`\n`}`)
+  console.log(`--- Tableau Reduction ---\n${reduction_by_price.map(e=>` >${e.price}=${e.value}`).join`\n`}`)
 
   let reduction
+  reduction = reduction_by_price.reduce((r,e)=>parseInt(e.price)<=price_ht?r=e.value:r=r,undefined)
+
+  console.log(`\n Reduction suggérer : ${reduction?reduction:0}`)
   do{
     reduction = await question(`Saisir le pourcentage de reduction: `)
   }while(isNaN(reduction))
