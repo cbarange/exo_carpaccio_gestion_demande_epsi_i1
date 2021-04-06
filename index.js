@@ -10,8 +10,20 @@ async function main(){
     state_code = await question(`Veuillez saisir le code d'état ? ${tva_by_countrycode.map(e=>e.code).join`/`}`).then(response=>tva_by_countrycode.reduce((r,e)=>e.code.toLowerCase()==response.toLowerCase().trim()?r=e:r=r,undefined))
   }while(!state_code || !tva_by_countrycode.map(e=>e.code.toLowerCase()).includes(state_code.code.toLowerCase().trim()))
 
-  console.log("La tva du pays choisi est :")
-  console.log(state_code.value)
+  console.log(`La tva du pays choisi est : ${state_code.value}`)
+
+  let articles = []
+  let isAllArticlesIn = false
+  do{
+    await question(`Saisir article ${articles.length+1}: `).then(response=>{
+      console.log(response)
+
+      if(response === 'fin')
+        isAllArticlesIn = true 
+      else if(response)
+        articles.push(response)
+    })
+  }while(!isAllArticlesIn)
 
   rl.close()
 }
