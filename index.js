@@ -42,10 +42,10 @@ async function main(){
   let reduction
   reduction = reduction_by_price.reduce((r,e)=>parseInt(e.price)<=price_ht?r=e.value:r=r,undefined)
 
-  console.log(`\n Reduction suggérer : ${reduction?reduction:0}`)
-  do{
-    reduction = await question(`Saisir le pourcentage de reduction: `)
-  }while(isNaN(reduction))
+  console.log(`\n Reduction appliqué : ${reduction?reduction:0}`)
+  // do{
+  //   reduction = await question(`Saisir le pourcentage de reduction: `)
+  // }while(isNaN(reduction))
   price_ht = price_ht * (1-(parseFloat(reduction)/100))
 
   console.log(`La somme total H.T: ${price_ht}`)
