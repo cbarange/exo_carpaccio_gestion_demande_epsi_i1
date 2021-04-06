@@ -13,17 +13,17 @@ async function main(){
   console.log(`La tva du pays choisi est : ${state_code.value}`)
 
   let articles = []
-  let isAllArticlesIn = false
+  let article
   do{
-    await question(`Saisir article ${articles.length+1}: `).then(response=>{
-      console.log(response)
-
-      if(response === 'fin')
-        isAllArticlesIn = true 
-      else if(response)
-        articles.push(response)
-    })
-  }while(!isAllArticlesIn)
+    article=await question(`Saisir article ${articles.length+1}: `)
+    if(article && article!='fin'){
+      let price
+      do{
+        price = await question(`Saisir le prix de l'article ${articles.length+1}: `)
+      }while(isNaN(price))
+      articles.push({article:article,price:price})
+    }
+  }while(article!=='fin')
 
   rl.close()
 }
