@@ -9,8 +9,9 @@ async function main(){
   do{
     state_code = await question(`Veuillez saisir le code d'état ? ${tva_by_countrycode.map(e=>e.code).join`/`}`).then(response=>tva_by_countrycode.reduce((r,e)=>e.code.toLowerCase()==response.toLowerCase().trim()?r=e:r=r,undefined))
   }while(!state_code || !tva_by_countrycode.map(e=>e.code.toLowerCase()).includes(state_code.code.toLowerCase().trim()))
-
   console.log(`La tva du pays choisi est : ${state_code.value}`)
+
+  console.log(['--- Tableau TVA ---',...tva_by_countrycode.map(e=>`${e.code} = ${e.value}`)].join`\n`)
 
   let articles = []
   let article
@@ -21,13 +22,13 @@ async function main(){
       do{
         price = await question(`Saisir le prix de l'article ${articles.length+1}: `)
       }while(isNaN(price))
-      
+
       let quantity
       do{
         quantity = await question(`Saisir la quantité de l'article ${articles.length+1}: `)
       }while(isNaN(quantity))
 
-      articles.push({article:article,price:price, quantity:quantity})
+      articles.push({article:article, price:price, quantity:quantity})
     }
   }while(article!=='fin')
 
