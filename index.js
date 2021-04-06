@@ -32,6 +32,7 @@ async function main(){
     }
   }while(article!=='fin')
 
+  console.log(`La somme total H.T : ${articles.reduce((r,e)=>r+=e.price*e.quantity,0)}`)
   rl.close()
 }
 
