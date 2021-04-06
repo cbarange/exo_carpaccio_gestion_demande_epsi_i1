@@ -33,6 +33,9 @@ async function main(){
   }while(article!=='fin')
 
   console.log(`La somme total H.T : ${articles.reduce((r,e)=>r+=e.price*e.quantity,0)}`)
+  console.log(`La TVA total : ${articles.reduce((r,e)=>r+=e.price*e.quantity,0)*((state_code.value/100))}`)
+  console.log(`La somme total T.T.C : ${articles.reduce((r,e)=>r+=e.price*e.quantity,0)*(1+(state_code.value/100))}`)
+
   rl.close()
 }
 
